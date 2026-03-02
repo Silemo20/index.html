@@ -1,252 +1,491 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ledeynama Süpriz</title>
 
 <style>
-/* =================== GRUNDLAGEN =================== */
-body{
-    margin:0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background:#f8c8dc;
-    overflow-x:hidden;
-}
+  :root{
+    --pink:#f8c8dc;
+    --card:#ffffffee;
+    --shadow: 0 18px 45px rgba(0,0,0,.14);
+    --greenBand:#dff4e5;
+    --greenText:#2e7d5b;
+    --muted:#6b6b6b;
+    --accent:#ff5fa2;
+    --accent2:#ff3b90;
+    --blue:#1e90ff;
+    --brace:#2e7d5b;
+  }
 
-/* Seiten */
-.page{
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--pink);
+    overflow-x:hidden;
+    color:#222;
+  }
+
+  /* Seiten */
+  .page{
     display:none;
     min-height:100vh;
-    padding:40px 20px;
+    padding:40px 18px;
     text-align:center;
-}
-.active{ display:block; }
+  }
+  .active{display:block}
 
-/* Karten (wie im Screenshot) */
-.card{
-    background:#ffffffee;
-    max-width:420px;
-    margin:80px auto;
-    padding:30px;
-    border-radius:18px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.15);
-}
+  /* ============ Hintergrund Schmetterlinge ============ */
+  .butterfly{
+    position:fixed;
+    font-size:26px;
+    color:var(--blue);
+    opacity:.85;
+    pointer-events:none;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,.15));
+    animation: fly 18s linear infinite;
+  }
+  @keyframes fly{
+    0%{transform:translateY(110vh) translateX(0) rotate(0deg)}
+    35%{transform:translateY(70vh) translateX(120px) rotate(8deg)}
+    70%{transform:translateY(30vh) translateX(-90px) rotate(-8deg)}
+    100%{transform:translateY(-12vh) translateX(40px) rotate(0deg)}
+  }
 
-/* Buttons */
-button{
-    background:#ff5fa2;
-    color:white;
+  /* ============ Buttons / Inputs ============ */
+  button{
+    background: var(--accent);
+    color:#fff;
     border:none;
-    padding:12px 25px;
+    padding:12px 22px;
     border-radius:12px;
     font-size:16px;
     cursor:pointer;
-}
-button:hover{
-    background:#ff3b90;
-}
-
-/* Inputs */
-input{
+    font-weight:700;
+    box-shadow: 0 10px 22px rgba(255,95,162,.25);
+  }
+  button:hover{ background: var(--accent2); }
+  input{
     width:100%;
-    padding:12px;
+    padding:12px 12px;
     border-radius:10px;
     border:1px solid #ddd;
-    margin:15px 0;
+    margin:14px 0;
     font-size:15px;
-}
+    outline:none;
+  }
+  input:focus{
+    border-color: rgba(255,95,162,.6);
+    box-shadow: 0 0 0 4px rgba(255,95,162,.15);
+  }
 
-/* =================== SCHMETTERLINGE =================== */
-.butterfly{
-    position:fixed;
-    font-size:26px;
-    color:#1e90ff;
-    opacity:0.8;
-    animation:fly 18s linear infinite;
-    pointer-events:none;
-}
-@keyframes fly{
-    0%{transform:translateY(110vh) translateX(0);}
-    50%{transform:translateY(40vh) translateX(120px);}
-    100%{transform:translateY(-10vh) translateX(-80px);}
-}
-
-/* =================== SEITE 1 =================== */
-.lock{
-    font-size:40px;
-    margin-bottom:10px;
-}
-.subtitle{
-    color:#777;
-    font-size:14px;
-}
-.small{
+  /* ============ Cards ============ */
+  .card{
+    background: var(--card);
+    box-shadow: var(--shadow);
+    border-radius:18px;
+    padding:26px;
+    margin: 70px auto 0;
+    max-width:440px;
+  }
+  .small{
     font-size:11px;
     color:#777;
-    margin-top:20px;
-}
+    margin-top:18px;
+  }
+  .lock{
+    font-size:42px;
+    margin-bottom:10px;
+  }
+  .subtitle{
+    color:var(--muted);
+    font-size:14px;
+    margin-top:6px;
+    line-height:1.35;
+  }
 
-/* =================== SEITE 2 =================== */
-.header-green{
-    background:#dff4e5;
-    padding:25px;
+  /* ============ Seite 2 Layout wie Screenshot ============ */
+  .band{
+    background: var(--greenBand);
     border-radius:18px;
-    max-width:900px;
-    margin:20px auto;
-}
-.header-green h1{
-    color:#2e7d5b;
-    margin-bottom:5px;
-}
-.header-green p{
+    padding:26px 18px;
+    max-width:980px;
+    margin: 10px auto 18px;
+    box-shadow: 0 14px 40px rgba(0,0,0,.08);
+  }
+  .band h1{
+    margin:0 0 6px 0;
+    color: var(--greenText);
+    letter-spacing:.2px;
+  }
+  .band p{
+    margin:0;
     color:#4f7f6a;
-}
+    line-height:1.35;
+  }
 
-.section{
-    max-width:900px;
-    margin:40px auto;
-}
-.section h2{
-    margin-bottom:20px;
-}
+  .section{
+    max-width:980px;
+    margin: 28px auto;
+  }
+  .section-title{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:center;
+    color: var(--greenText);
+    font-weight:800;
+    letter-spacing:.2px;
+    margin: 10px 0 18px;
+  }
+  .section-title span.badge{
+    display:inline-flex;
+    width:12px;height:12px;
+    border-radius:3px;
+    background: var(--greenText);
+    opacity:.9;
+  }
 
-/* Gründe */
-.reasons{
+  /* Love Story rows */
+  .story{
+    background: var(--greenBand);
+    border-radius:18px;
+    padding: 14px 14px;
+    box-shadow: 0 14px 40px rgba(0,0,0,.08);
+  }
+  .story-row{
+    display:grid;
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+    padding: 14px 10px;
+    border-radius:14px;
+  }
+  .story-row + .story-row{
+    border-top: 1px solid rgba(46,125,91,.18);
+  }
+  .story-ico{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    font-size:22px;
+    margin-top:2px;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,.12));
+  }
+  .story-text{
+    text-align:left;
+  }
+  .story-text h3{
+    margin:0 0 6px;
+    color:#2f2f2f;
+    font-size:16px;
+  }
+  .story-text p{
+    margin:0;
+    color:#5a5a5a;
+    line-height:1.45;
+    font-size:14px;
+  }
+
+  /* Reasons grid like screenshot */
+  .reasons-wrap{
+    background: #f3fbf6;
+    border-radius:18px;
+    padding: 18px 14px;
+    box-shadow: 0 14px 40px rgba(0,0,0,.08);
+  }
+  .reasons-grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 14px;
+  }
+  @media (max-width: 860px){
+    .reasons-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+  @media (max-width: 560px){
+    .reasons-grid{ grid-template-columns: 1fr; }
+  }
+  .reason-card{
+    background: #ffffffde;
+    border-radius:16px;
+    padding: 16px 14px;
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 10px 22px rgba(0,0,0,.06);
+    min-height: 92px;
+  }
+  /* green braces (like the screenshot) */
+  .reason-card::before,
+  .reason-card::after{
+    content:"";
+    position:absolute;
+    top:16px;
+    width:3px;
+    height: calc(100% - 32px);
+    background: var(--brace);
+    border-radius:6px;
+    opacity:.65;
+  }
+  .reason-card::before{ left: 10px; }
+  .reason-card::after{ right: 10px; }
+  .reason-emoji{
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  .reason-text{
+    font-size:13.5px;
+    color:#4f4f4f;
+    line-height:1.35;
+    padding: 0 10px;
+  }
+
+  /* Fun row (🖕) */
+  .fun{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    color:#444;
+  }
+  .fun .emo{font-size:40px}
+
+  /* Love letter card like screenshot (green background with white card) */
+  .letter-band{
+    background: #7edaa3;
+    border-radius:18px;
+    padding: 34px 16px;
+    max-width:980px;
+    margin: 28px auto 40px;
+    box-shadow: 0 14px 40px rgba(0,0,0,.10);
+  }
+  .letter-card{
+    background:#fff;
+    border-radius:16px;
+    max-width:520px;
+    margin: 0 auto;
+    padding: 26px 20px;
+    border: 2px solid rgba(255,95,162,.35);
+    box-shadow: 0 18px 45px rgba(0,0,0,.10);
+    cursor:pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .letter-card:hover{
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 22px 55px rgba(0,0,0,.14);
+  }
+  .letter-heart{
+    font-size:46px;
+    margin-bottom:10px;
+  }
+  .letter-text{
+    font-weight:800;
+    color:#e04c8f;
+    letter-spacing:.2px;
+  }
+  .letter-sub{
+    margin-top:6px;
+    color:#666;
+    font-size:13px;
+  }
+
+  /* Seite 3 */
+  .final-card{
+    background:white;
+    max-width:640px;
+    margin: 70px auto 0;
+    padding: 30px 26px;
+    border-radius:20px;
+    box-shadow: var(--shadow);
+    text-align:left;
+    line-height:1.55;
+  }
+  .final-card h2{
+    margin:0 0 10px;
+    text-align:center;
+  }
+  .final-actions{
     display:flex;
     justify-content:center;
-    gap:30px;
-    flex-wrap:wrap;
-}
-.reason{
-    max-width:200px;
-}
-
-/* Umschlag */
-.envelope{
-    font-size:70px;
-    cursor:pointer;
-    margin:50px 0;
-    transition:transform .6s;
-}
-.envelope:hover{
-    transform:scale(1.2) rotate(-5deg);
-}
-
-/* =================== SEITE 3 =================== */
-.final-card{
-    background:white;
-    max-width:600px;
-    margin:80px auto;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,.2);
-}
+    margin-top:18px;
+  }
 </style>
 </head>
 
 <body>
 
-<!-- 🦋 SCHMETTERLINGE -->
+<!-- 🦋 Hintergrund-Schmetterlinge -->
 <div class="butterfly" style="left:10%;">🦋</div>
-<div class="butterfly" style="left:30%; animation-delay:4s;">🦋</div>
+<div class="butterfly" style="left:28%; animation-delay:4s;">🦋</div>
 <div class="butterfly" style="left:55%; animation-delay:8s;">🦋</div>
-<div class="butterfly" style="left:75%; animation-delay:12s;">🦋</div>
+<div class="butterfly" style="left:78%; animation-delay:12s;">🦋</div>
 
 <!-- =================== SEITE 1 =================== -->
 <div id="page1" class="page active">
-    <div class="card">
-        <div class="lock">🔒</div>
-        <h2>Special Süpriz 🎂</h2>
-        <p class="subtitle">Schreibe unser Jahrestagsdatum, um dein Geschenk zu öffnen</p>
-
-        <input id="dateInput" placeholder="Datum eingeben">
-        <button onclick="nextPage()">Bestätigen</button>
-
-        <div class="small">Seni Seviyorum Kelebegim 🦋</div>
+  <div class="card">
+    <div class="lock">🔒</div>
+    <h2 style="margin:0;">Ledeynama Süpriz 🎀</h2>
+    <div class="subtitle">
+      <b>Schreibe unser Jahrestagsdatum</b><br/>
+      (jedes Datum funktioniert)
     </div>
+
+    <input id="dateInput" placeholder="Datum eingeben" />
+    <button onclick="nextPage()">Bestätigen</button>
+
+    <div class="small">Seni seviyorum, kelebeğim 🦋</div>
+  </div>
 </div>
 
 <!-- =================== SEITE 2 =================== -->
 <div id="page2" class="page">
 
-    <div class="header-green">
-        <h1>Ömrüm 💚</h1>
-        <p>Senin kalbin benim en degerli hazinemdir, onu ömrümlen korurum</p>
+  <div class="band">
+    <h1>Ömrüm 💚</h1>
+    <p>Senin kalbin benim en değerli hazinemdir; onu ömrüm boyunca korurum.</p>
+  </div>
+
+  <!-- Our Love Story -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge"></span>
+      <div>Our Love Story</div>
     </div>
 
-    <div class="section">
-        <h2>🤍 Unsere Liebesgeschichte</h2>
-        <p>🤍 hayatimasa beklemedigimiz anda girdik, Gülücükler ve Sevgi verdik.</p>
-        <p>🌠 zorlu günlerde gecirsek, beraber bunlara asiacgiz ve daha güclu olacagiz.</p>
-        <p>🌹 Allah bizi ayirmasin, O senin kalbini bana yazsin, bende seninkine.</p>
+    <div class="story">
+      <div class="story-row">
+        <div class="story-ico">🤍</div>
+        <div class="story-text">
+          <h3>From the First Day</h3>
+          <p>Hayatıma beklemediğim bir anda girdin; bana gülücükler ve sevgi verdin.</p>
+        </div>
+      </div>
+
+      <div class="story-row">
+        <div class="story-ico">🌠</div>
+        <div class="story-text">
+          <h3>Growing Together</h3>
+          <p>Zorlu günlerden geçsek de, bunları birlikte aşacağız ve daha da güçlü olacağız.</p>
+        </div>
+      </div>
+
+      <div class="story-row">
+        <div class="story-ico">🌹</div>
+        <div class="story-text">
+          <h3>Forever and Always</h3>
+          <p>Allah bizi ayırmasın; O, senin kalbini bana, benimkini de sana yazsın.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reasons -->
+  <div class="section">
+    <div class="section-title">
+      <div style="font-size:18px;">💚</div>
+      <div>Reasons Why I Love You</div>
     </div>
 
-    <div class="section">
-        <h2>Gründe warum ich dich liebe</h2>
-        <div class="reasons">
-            <div class="reason">
-                <div style="font-size:40px;">😊</div>
-                Dein Lachen ist mein Leben.
-            </div>
-            <div class="reason">
-                <div style="font-size:40px;">🤗</div>
-                Deine Umarmungen lassen all meine Sorgen vergessen.
-            </div>
-            <div class="reason">
-                <div style="font-size:40px;">🦋</div>
-                Kelebegim benim
-            </div>
+    <div class="reasons-wrap">
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <div class="reason-emoji">😊</div>
+          <div class="reason-text">Dein Lachen ist mein Leben.</div>
         </div>
 
-        <div style="margin-top:30px;">
-            <div style="font-size:40px;">🖕</div>
-            Das verdienst auch ab und zu 😜
+        <div class="reason-card">
+          <div class="reason-emoji">🤗</div>
+          <div class="reason-text">Deine Umarmungen lassen all meine Sorgen vergessen.</div>
         </div>
-    </div>
 
-    <div class="envelope" onclick="goToPage3()">✉️<br><span style="font-size:16px;">Öffne mich</span></div>
+        <div class="reason-card">
+          <div class="reason-emoji">🦋</div>
+          <div class="reason-text">Kelebeğim benim.</div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-emoji">🖕</div>
+          <div class="reason-text">Das verdienst du auch ab und zu 😜</div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-emoji">✨</div>
+          <div class="reason-text">Mit dir fühlt sich alles leichter an.</div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-emoji">💖</div>
+          <div class="reason-text">Sen benim en güzel şansımsın.</div>
+        </div>
+      </div>
+
+      <div class="fun">
+        <div class="emo">💐🦋</div>
+        <div style="font-size:12px;color:#666">Scroll weiter nach unten für den Brief 💌</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Love Letter (wie Screenshot) -->
+  <div class="letter-band">
+    <div class="letter-card" onclick="goToPage3()">
+      <div class="letter-heart">❤️</div>
+      <div class="letter-text">Click to open my love letter</div>
+      <div class="letter-sub">Öffne mich 💌</div>
+    </div>
+  </div>
+
 </div>
 
 <!-- =================== SEITE 3 =================== -->
 <div id="page3" class="page">
-    <div class="final-card">
-        <p>
-        Papatyam, zorlu günlerden de gecsek, asla pes etmeyelim.  
-        Birbirimize destek olalim.  
-        Cicekler kapandigi gibi, yeniden acarlar.  
-        <br><br>
-        Wir werden das schaffen.  
-        Ich habe eine kleine Überraschung für dich.  
-        Diese bekommst du nach alldem hier.  
-        <br><br>
-        Seni Seviyorum Ömrüm 😄  
-        <br>
-        PS: Mmmmm 😄
-        </p>
-
-        <button onclick="restart()">erneut</button>
+  <div class="final-card">
+    <h2>💌</h2>
+    <div>
+      Papatyam, zorlu günlerden de geçsek asla pes etmeyelim. Birbirimize destek olalım.
+      Çiçekler kapandığı gibi yeniden açarlar.
+      <br><br>
+      Wir werden das schaffen. Ich habe eine kleine Überraschung für dich.
+      Diese bekommst du nach alldem hier.
+      <br><br>
+      Seni seviyorum, ömrüm 😄
+      <br>
+      PS: Mmmmm 😄
     </div>
+
+    <div class="final-actions">
+      <button onclick="restart()">erneut</button>
+    </div>
+  </div>
 </div>
 
 <script>
-function nextPage(){
-    if(document.getElementById("dateInput").value !== ""){
-        page1.classList.remove("active");
-        page2.classList.add("active");
-        window.scrollTo(0,0);
+  const page1 = document.getElementById("page1");
+  const page2 = document.getElementById("page2");
+  const page3 = document.getElementById("page3");
+  const dateInput = document.getElementById("dateInput");
+
+  function nextPage(){
+    if(dateInput.value.trim() !== ""){
+      page1.classList.remove("active");
+      page2.classList.add("active");
+      window.scrollTo(0,0);
     }
-}
-function goToPage3(){
+  }
+
+  function goToPage3(){
     page2.classList.remove("active");
     page3.classList.add("active");
     window.scrollTo(0,0);
-}
-function restart(){
+  }
+
+  function restart(){
     page3.classList.remove("active");
     page1.classList.add("active");
-    dateInput.value="";
+    dateInput.value = "";
     window.scrollTo(0,0);
-}
+  }
 </script>
 
 </body>
