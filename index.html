@@ -3,179 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <title>Ledeynama Süpriz</title>
+
 <style>
-body {
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f8c8dc;
-  overflow-x:hidden;
+/* =================== GRUNDLAGEN =================== */
+body{
+    margin:0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background:#f8c8dc;
+    overflow-x:hidden;
 }
 
 /* Seiten */
-.page { display:none; min-height:100vh; text-align:center; padding:40px; }
-.active { display:block; }
+.page{
+    display:none;
+    min-height:100vh;
+    padding:40px 20px;
+    text-align:center;
+}
+.active{ display:block; }
 
-/* Weiße Box */
-.box {
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  max-width:650px;
-  margin:auto;
-  box-shadow:0 0 25px rgba(0,0,0,0.2);
+/* Karten (wie im Screenshot) */
+.card{
+    background:#ffffffee;
+    max-width:420px;
+    margin:80px auto;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
 }
 
-/* Fliegende Schmetterlinge */
-.butterfly {
-  position:fixed;
-  font-size:28px;
-  animation:fly 15s linear infinite;
-  color:#1e90ff;
-  opacity:0.8;
+/* Buttons */
+button{
+    background:#ff5fa2;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{
+    background:#ff3b90;
 }
 
-@keyframes fly {
-  0% {transform:translateY(110vh) translateX(0) rotate(0deg);}
-  25% {transform:translateY(75vh) translateX(80px) rotate(10deg);}
-  50% {transform:translateY(50vh) translateX(-60px) rotate(-10deg);}
-  75% {transform:translateY(20vh) translateX(100px) rotate(10deg);}
-  100% {transform:translateY(-10vh) translateX(0) rotate(0deg);}
+/* Inputs */
+input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    margin:15px 0;
+    font-size:15px;
 }
 
-/* Titel grün */
-.greenTitle {
-  background:rgba(0,255,0,0.25);
-  padding:10px;
-  border-radius:12px;
+/* =================== SCHMETTERLINGE =================== */
+.butterfly{
+    position:fixed;
+    font-size:26px;
+    color:#1e90ff;
+    opacity:0.8;
+    animation:fly 18s linear infinite;
+    pointer-events:none;
+}
+@keyframes fly{
+    0%{transform:translateY(110vh) translateX(0);}
+    50%{transform:translateY(40vh) translateX(120px);}
+    100%{transform:translateY(-10vh) translateX(-80px);}
 }
 
-/* Button */
-button {
-  padding:10px 20px;
-  margin-top:15px;
-  cursor:pointer;
-  border:none;
-  border-radius:10px;
-  background:#ff69b4;
-  color:white;
-  font-weight:bold;
+/* =================== SEITE 1 =================== */
+.lock{
+    font-size:40px;
+    margin-bottom:10px;
 }
-button:hover { background:#ff1493; }
-
-/* Briefumschlag Animation */
-.envelope {
-  margin-top:50px;
-  font-size:70px;
-  cursor:pointer;
-  transition: transform 0.6s ease;
+.subtitle{
+    color:#777;
+    font-size:14px;
 }
-.envelope.opened { transform: rotateX(180deg) scale(1.2); }
+.small{
+    font-size:11px;
+    color:#777;
+    margin-top:20px;
+}
 
-/* Kleine Schrift */
-.small { font-size:12px; margin-top:20px; }
+/* =================== SEITE 2 =================== */
+.header-green{
+    background:#dff4e5;
+    padding:25px;
+    border-radius:18px;
+    max-width:900px;
+    margin:20px auto;
+}
+.header-green h1{
+    color:#2e7d5b;
+    margin-bottom:5px;
+}
+.header-green p{
+    color:#4f7f6a;
+}
 
+.section{
+    max-width:900px;
+    margin:40px auto;
+}
+.section h2{
+    margin-bottom:20px;
+}
+
+/* Gründe */
+.reasons{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+.reason{
+    max-width:200px;
+}
+
+/* Umschlag */
+.envelope{
+    font-size:70px;
+    cursor:pointer;
+    margin:50px 0;
+    transition:transform .6s;
+}
+.envelope:hover{
+    transform:scale(1.2) rotate(-5deg);
+}
+
+/* =================== SEITE 3 =================== */
+.final-card{
+    background:white;
+    max-width:600px;
+    margin:80px auto;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
 </style>
 </head>
+
 <body>
 
-<!-- Schmetterlinge -->
+<!-- 🦋 SCHMETTERLINGE -->
 <div class="butterfly" style="left:10%;">🦋</div>
-<div class="butterfly" style="left:30%; animation-delay:3s;">🦋</div>
-<div class="butterfly" style="left:50%; animation-delay:6s;">🦋</div>
-<div class="butterfly" style="left:70%; animation-delay:9s;">🦋</div>
-<div class="butterfly" style="left:85%; animation-delay:12s;">🦋</div>
+<div class="butterfly" style="left:30%; animation-delay:4s;">🦋</div>
+<div class="butterfly" style="left:55%; animation-delay:8s;">🦋</div>
+<div class="butterfly" style="left:75%; animation-delay:12s;">🦋</div>
 
-<!-- SEITE 1 -->
+<!-- =================== SEITE 1 =================== -->
 <div id="page1" class="page active">
-  <div class="box">
-    <h1>🌹 Ledeynama Süpriz 🦋</h1>
-    <p><b>schreibe unser Jahrestagsdatum</b></p>
-    <input type="text" id="dateInput" placeholder="Datum eingeben">
-    <br>
-    <button onclick="nextPage()">Bestätigen</button>
-    <div class="small">Seni Seviyorum Kelebegim</div>
-  </div>
+    <div class="card">
+        <div class="lock">🔒</div>
+        <h2>Special Süpriz 🎂</h2>
+        <p class="subtitle">Schreibe unser Jahrestagsdatum, um dein Geschenk zu öffnen</p>
+
+        <input id="dateInput" placeholder="Datum eingeben">
+        <button onclick="nextPage()">Bestätigen</button>
+
+        <div class="small">Seni Seviyorum Kelebegim 🦋</div>
+    </div>
 </div>
 
-<!-- SEITE 2 -->
+<!-- =================== SEITE 2 =================== -->
 <div id="page2" class="page">
-  <h1 class="greenTitle">Ömrüm</h1>
-  <h3>Senin kalbin benim en degerli hazinemdir, onu ömrümlen Korurum</h3>
-  <h2>💐🦋🦋🦋</h2>
 
-  <h2>🤍 unsere Liebesgeschichte</h2>
-  <p>🤍 hayatimasa beklemedigimiz anda girdik, Gülücükler ve Sevgi verdik.</p>
-  <p>🌠 zorlu günlerde gecirsek, beraber bunlara asiacgiz ve daha güclu oluacgiz.</p>
-  <p>🌹 Allah Bizi ayirmasin, O senin kalbini bana yazsin bende seninkine.</p>
-
-  <h2>Gründe warum ich dich liebe</h2>
-  <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
-    <div>
-      <div style="font-size:40px;">😊</div>
-      Dein Lachen ist mein Leben.
+    <div class="header-green">
+        <h1>Ömrüm 💚</h1>
+        <p>Senin kalbin benim en degerli hazinemdir, onu ömrümlen korurum</p>
     </div>
-    <div>
-      <div style="font-size:40px;">🤗</div>
-      deine Umarmungen lassen all meine Sorgen vergessen.
-    </div>
-    <div>
-      <div style="font-size:40px;">🦋</div>
-      Kelebegim benim
-    </div>
-  </div>
 
-  <div style="margin-top:40px;">
-    <div style="font-size:40px;">🖕</div>
-    Das verdienst auch ab und zu 😜
-  </div>
+    <div class="section">
+        <h2>🤍 Unsere Liebesgeschichte</h2>
+        <p>🤍 hayatimasa beklemedigimiz anda girdik, Gülücükler ve Sevgi verdik.</p>
+        <p>🌠 zorlu günlerde gecirsek, beraber bunlara asiacgiz ve daha güclu olacagiz.</p>
+        <p>🌹 Allah bizi ayirmasin, O senin kalbini bana yazsin, bende seninkine.</p>
+    </div>
 
-  <!-- Animierter Brief -->
-  <div id="envelope" class="envelope" onclick="openEnvelope()">✉️<br><span style="font-size:18px;">Öffne mich</span></div>
+    <div class="section">
+        <h2>Gründe warum ich dich liebe</h2>
+        <div class="reasons">
+            <div class="reason">
+                <div style="font-size:40px;">😊</div>
+                Dein Lachen ist mein Leben.
+            </div>
+            <div class="reason">
+                <div style="font-size:40px;">🤗</div>
+                Deine Umarmungen lassen all meine Sorgen vergessen.
+            </div>
+            <div class="reason">
+                <div style="font-size:40px;">🦋</div>
+                Kelebegim benim
+            </div>
+        </div>
+
+        <div style="margin-top:30px;">
+            <div style="font-size:40px;">🖕</div>
+            Das verdienst auch ab und zu 😜
+        </div>
+    </div>
+
+    <div class="envelope" onclick="goToPage3()">✉️<br><span style="font-size:16px;">Öffne mich</span></div>
 </div>
 
-<!-- SEITE 3 -->
+<!-- =================== SEITE 3 =================== -->
 <div id="page3" class="page">
-  <div class="box">
-    <h2>
-      Papatyam, Zorlu günlerdende gecsek, asla pes etmeyelim, 
-      birbirimize destek olalim. Cicekler kapandigi gibi, yenidene acarlar. 
-      Wir werden das schaffen. Ich habe eine kleine Überraschung für dich. 
-      Diese bekommst du nach alldem hier. Seni Seviyorum Ömrüm 😄 
-      PS: Mmmmm 😄
-    </h2>
+    <div class="final-card">
+        <p>
+        Papatyam, zorlu günlerden de gecsek, asla pes etmeyelim.  
+        Birbirimize destek olalim.  
+        Cicekler kapandigi gibi, yeniden acarlar.  
+        <br><br>
+        Wir werden das schaffen.  
+        Ich habe eine kleine Überraschung für dich.  
+        Diese bekommst du nach alldem hier.  
+        <br><br>
+        Seni Seviyorum Ömrüm 😄  
+        <br>
+        PS: Mmmmm 😄
+        </p>
 
-    <button onclick="restart()">erneut</button>
-  </div>
+        <button onclick="restart()">erneut</button>
+    </div>
 </div>
 
 <script>
 function nextPage(){
-  var input = document.getElementById("dateInput").value;
-  if(input !== ""){
-    document.getElementById("page1").classList.remove("active");
-    document.getElementById("page2").classList.add("active");
-    window.scrollTo(0,0);
-  }
+    if(document.getElementById("dateInput").value !== ""){
+        page1.classList.remove("active");
+        page2.classList.add("active");
+        window.scrollTo(0,0);
+    }
 }
-
-// Briefumschlag aufklappen und zur Seite 3 wechseln
-function openEnvelope(){
-  const env = document.getElementById("envelope");
-  env.classList.add("opened");
-  setTimeout(()=>{
-    document.getElementById("page2").classList.remove("active");
-    document.getElementById("page3").classList.add("active");
+function goToPage3(){
+    page2.classList.remove("active");
+    page3.classList.add("active");
     window.scrollTo(0,0);
-    env.classList.remove("opened");
-  }, 600); // 600ms entspricht der CSS-Animation
 }
-
-// Zurück zu Seite 1
 function restart(){
-  document.getElementById("page3").classList.remove("active");
-  document.getElementById("page1").classList.add("active");
-  document.getElementById("dateInput").value="";
-  window.scrollTo(0,0);
+    page3.classList.remove("active");
+    page1.classList.add("active");
+    dateInput.value="";
+    window.scrollTo(0,0);
 }
 </script>
 
