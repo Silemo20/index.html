@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Ledeynama Süpriz</title>
+<style>
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f8c8dc;
+  overflow-x:hidden;
+}
+
+/* Seiten */
+.page { display:none; min-height:100vh; text-align:center; padding:40px; }
+.active { display:block; }
+
+/* Weiße Box */
+.box {
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  max-width:650px;
+  margin:auto;
+  box-shadow:0 0 25px rgba(0,0,0,0.2);
+}
+
+/* Fliegende Schmetterlinge */
+.butterfly {
+  position:fixed;
+  font-size:28px;
+  animation:fly 15s linear infinite;
+  color:#1e90ff;
+  opacity:0.8;
+}
+
+@keyframes fly {
+  0% {transform:translateY(110vh) translateX(0) rotate(0deg);}
+  25% {transform:translateY(75vh) translateX(80px) rotate(10deg);}
+  50% {transform:translateY(50vh) translateX(-60px) rotate(-10deg);}
+  75% {transform:translateY(20vh) translateX(100px) rotate(10deg);}
+  100% {transform:translateY(-10vh) translateX(0) rotate(0deg);}
+}
+
+/* Titel grün */
+.greenTitle {
+  background:rgba(0,255,0,0.25);
+  padding:10px;
+  border-radius:12px;
+}
+
+/* Button */
+button {
+  padding:10px 20px;
+  margin-top:15px;
+  cursor:pointer;
+  border:none;
+  border-radius:10px;
+  background:#ff69b4;
+  color:white;
+  font-weight:bold;
+}
+button:hover { background:#ff1493; }
+
+/* Briefumschlag Animation */
+.envelope {
+  margin-top:50px;
+  font-size:70px;
+  cursor:pointer;
+  transition: transform 0.6s ease;
+}
+.envelope.opened { transform: rotateX(180deg) scale(1.2); }
+
+/* Kleine Schrift */
+.small { font-size:12px; margin-top:20px; }
+
+</style>
+</head>
+<body>
+
+<!-- Schmetterlinge -->
+<div class="butterfly" style="left:10%;">🦋</div>
+<div class="butterfly" style="left:30%; animation-delay:3s;">🦋</div>
+<div class="butterfly" style="left:50%; animation-delay:6s;">🦋</div>
+<div class="butterfly" style="left:70%; animation-delay:9s;">🦋</div>
+<div class="butterfly" style="left:85%; animation-delay:12s;">🦋</div>
+
+<!-- SEITE 1 -->
+<div id="page1" class="page active">
+  <div class="box">
+    <h1>🌹 Ledeynama Süpriz 🦋</h1>
+    <p><b>schreibe unser Jahrestagsdatum</b></p>
+    <input type="text" id="dateInput" placeholder="Datum eingeben">
+    <br>
+    <button onclick="nextPage()">Bestätigen</button>
+    <div class="small">Seni Seviyorum Kelebegim</div>
+  </div>
+</div>
+
+<!-- SEITE 2 -->
+<div id="page2" class="page">
+  <h1 class="greenTitle">Ömrüm</h1>
+  <h3>Senin kalbin benim en degerli hazinemdir, onu ömrümlen Korurum</h3>
+  <h2>💐🦋🦋🦋</h2>
+
+  <h2>🤍 unsere Liebesgeschichte</h2>
+  <p>🤍 hayatimasa beklemedigimiz anda girdik, Gülücükler ve Sevgi verdik.</p>
+  <p>🌠 zorlu günlerde gecirsek, beraber bunlara asiacgiz ve daha güclu oluacgiz.</p>
+  <p>🌹 Allah Bizi ayirmasin, O senin kalbini bana yazsin bende seninkine.</p>
+
+  <h2>Gründe warum ich dich liebe</h2>
+  <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+    <div>
+      <div style="font-size:40px;">😊</div>
+      Dein Lachen ist mein Leben.
+    </div>
+    <div>
+      <div style="font-size:40px;">🤗</div>
+      deine Umarmungen lassen all meine Sorgen vergessen.
+    </div>
+    <div>
+      <div style="font-size:40px;">🦋</div>
+      Kelebegim benim
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <div style="font-size:40px;">🖕</div>
+    Das verdienst auch ab und zu 😜
+  </div>
+
+  <!-- Animierter Brief -->
+  <div id="envelope" class="envelope" onclick="openEnvelope()">✉️<br><span style="font-size:18px;">Öffne mich</span></div>
+</div>
+
+<!-- SEITE 3 -->
+<div id="page3" class="page">
+  <div class="box">
+    <h2>
+      Papatyam, Zorlu günlerdende gecsek, asla pes etmeyelim, 
+      birbirimize destek olalim. Cicekler kapandigi gibi, yenidene acarlar. 
+      Wir werden das schaffen. Ich habe eine kleine Überraschung für dich. 
+      Diese bekommst du nach alldem hier. Seni Seviyorum Ömrüm 😄 
+      PS: Mmmmm 😄
+    </h2>
+
+    <button onclick="restart()">erneut</button>
+  </div>
+</div>
+
+<script>
+function nextPage(){
+  var input = document.getElementById("dateInput").value;
+  if(input !== ""){
+    document.getElementById("page1").classList.remove("active");
+    document.getElementById("page2").classList.add("active");
+    window.scrollTo(0,0);
+  }
+}
+
+// Briefumschlag aufklappen und zur Seite 3 wechseln
+function openEnvelope(){
+  const env = document.getElementById("envelope");
+  env.classList.add("opened");
+  setTimeout(()=>{
+    document.getElementById("page2").classList.remove("active");
+    document.getElementById("page3").classList.add("active");
+    window.scrollTo(0,0);
+    env.classList.remove("opened");
+  }, 600); // 600ms entspricht der CSS-Animation
+}
+
+// Zurück zu Seite 1
+function restart(){
+  document.getElementById("page3").classList.remove("active");
+  document.getElementById("page1").classList.add("active");
+  document.getElementById("dateInput").value="";
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
